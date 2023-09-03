@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Proza+Libre&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Poppins&family=Proza+Libre&display=swap');
 *{
     margin: 0;
     padding: 0;
@@ -7,7 +6,8 @@
 }
 
 :root{
-    --body-clr: #8880f6;
+    /* --body-clr: #8880f6; */
+    --body-clr: #320061;
     --phonetic-clr: #eb948a;
     --part-of-speech-txt-clr: #56b0c2;
     --part-of-speech-bk-clr: #cef3fb;
@@ -21,11 +21,16 @@
 body{
     background-color: var(--body-clr);
     height: 100vh;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Proza Libre', sans-serif;
     position: relative;
 }
 
 /* utilities */
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 .container {
     max-width: 800px;
@@ -33,16 +38,16 @@ body{
     margin: 0 auto;
 }
 
-ol{
-    list-style-position: inside;
-}
 
 hr {
     border: none;
-    height: 2px;
+    outline: none;
+    padding: 1px;
     background-color: rgba(130, 126, 126, 0.2);
     margin: 1rem 0;
 }
+
+
 
 /* header */
 nav {
@@ -67,12 +72,15 @@ nav h1{
     display: flex;
     justify-content: center;  
     flex-direction: column;
+    border-radius: 20px;
     
     position: relative;
+
+    overflow: hidden;
 }
 
 .search-area input{
-    padding: 10px 50px;
+    padding: 10px 55px;
     font-size: 20px;
     border-radius: 20px;
     border: none;
@@ -84,28 +92,39 @@ nav h1{
     font-size: 1.5rem;
     color: #929798;
     cursor: pointer;
+
+    padding: 1rem 1rem;
 }
 
 #search-btn {
     position: absolute;
-    top: 10px;
-    left: 12px;
+    /* top: 10px;
+    left: 12px;*/
+    top: -6px;
+    left: -6px;
+} 
+
+#clear-btn{
+    position: absolute;
+    /* top: 7px;
+    right: 12px; */
+    top: -10px;
+    right: -6px;
+    font-size: 30px;
 }
 
 #search-btn:hover,#clear-btn:hover{
     color: #333;
+    
+    background-color: #f2f2f2;
+
 }
 
 #search-btn:active,#clear-btn:active{
     transform: scale(90%);
 }
 
-#clear-btn{
-    position: absolute;
-    top: 7px;
-    right: 12px; 
-    font-size: 30px;
-}
+
 
 /* section-down */
 
@@ -118,7 +137,7 @@ nav h1{
     padding-bottom: 4rem;
 }
 
-.searched-word-div {
+.searched-word-div, .white-box {
     width: 97%;
     margin-top: 0.6rem;
     padding: .5rem 1rem;
@@ -155,12 +174,32 @@ nav h1{
 }
 
 .part-of-speech {
-    background-color: var(--part-of-speech-bk-clr);
     display: inline-block;
     padding: 3px 15px;
     font-weight: bold;
-    color: var(--part-of-speech-txt-clr);
+    
     border-radius: 8px;
+    margin-top: .5rem;
+}
+
+.part-of-speech-noun {
+    background-color: #b2ff98;
+    color: #144900;
+}
+
+.part-of-speech-verb {
+    background-color: #75ddf2;
+    color: #00596d;
+}
+
+.part-of-speech-adjective {
+    background-color:  #ffee7d;
+    color: rgb(99, 87, 0);
+}
+
+.part-of-speech-others {
+    background-color:  #ff86ae;
+    color: #970032;
 }
 
 .meanings{
@@ -169,23 +208,16 @@ nav h1{
 
 .meaning {
     display: flex;
-    /* align-items: center; */
-}
-
-.meaning p{
-    font-size: 16px;
-    text-transform: none;
-    margin-top: 10px;
-    width: 85%;
 }
 
 .span-div {
-    width: 10%;
+    width: 8%;
+    text-align: center;
 }
 
 .meaning span{
     background-color: transparent;
-    color: rgb(164, 164, 164);
+    color: rgb(205, 200, 200);
     height: var(--span-h-w);
     width: var(--span-h-w);
     /* margin-right: 2rem; */
@@ -200,10 +232,43 @@ nav h1{
 }
 
 
+.meaning p{
+    font-size: 16px;
+    text-transform: none;
+    margin-top: 13px;
+    width: 85%;
+}
 
-/* spacer */
-/* .spacer{
-    height: 50vh;
-    back
-} */
+
+.copy-icon{
+    opacity: 0%;
+    transition: opacity .1s ease;
+    cursor: pointer;
+    font-size: 1.7rem;
+    margin-left: 1rem;
+
+}
+
+.copy-icon:active{
+    transform: scale(1.1) translateY(4px); 
+    color: #1c7000;
+}
+
+
+.copy-alert {
+    text-align: center;
+    transition: bottom .4sec ease-in;
+}
+
+.copy-alert p{
+    color: white;
+    background-color: rgb(0, 0, 0);
+    display: inline-block;
+    padding: 4px 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px 5px rgba(64, 64, 64, 0.4);
+}
+
+
+
 
