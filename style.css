@@ -34,7 +34,7 @@ body{
     height: 100vh;
     font-family: 'Fira Code', monospace;
     position: relative;
-    transition: background-color .3s ease;
+    transition: background-color .1s linear;
 }
 
 /* utilities */
@@ -67,13 +67,6 @@ nav {
     justify-content: center;
 }
 
-/* nav h1{
-    font-size: 32px;
-    font-family: 'Proza Libre', sans-serif;
-    color: white;
-    margin-top: 1rem;
-} */
-
 /* section-top */
 
 .section-top{
@@ -101,8 +94,9 @@ nav {
     width: 4rem;
 
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
     
-    transition: background-color .3s ease;
+    transition: background-color .1s linear;
 }
 
 .toggle-icon .circle{
@@ -138,8 +132,7 @@ input{
     border: 3px var(--light-gray-clr) solid;
     outline: none;
 
-    transition: background-color .3s ease;
-    transition: border .3s ease;
+    transition: background-color .1s linear,border .1s linear;
 }
 
 .search-area input:focus{
@@ -163,7 +156,7 @@ input{
     flex-direction: column;
 
     
-    transition: background-color .3s ease;
+    transition: background-color .1s linear;
 }
 
 /* ERROR RESPONSE  */
@@ -233,7 +226,7 @@ input{
     border-radius: 22px;
 
     
-    transition: background-color .3s ease;
+    transition: background-color .1s linear;
 }
 
 .searched-word {
@@ -251,7 +244,9 @@ input{
     width: 70px;
     background-color: var(--light-accent-clr);
     color: var(--accent-clr);
+
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
 
     display: flex;
     justify-content: center;
@@ -268,7 +263,7 @@ input{
 /*meaning div*/
 .meaning-div {
     width: 98%;
-    transition: background-color .3s ease;
+    transition: background-color .1s linear;
 }
 
 .part-of-speech {
@@ -323,7 +318,7 @@ input{
 
 .copy-icon{
     opacity: 0%;
-    transition: opacity .1s ease;
+    transition: opacity .1s linear;
     cursor: pointer;
     font-size: 1.7rem;
     margin-left: 1rem;
@@ -342,7 +337,7 @@ footer{
     height: 20vh;
     display: flex;
     justify-content: center;
-    transition: background-color .3s ease;
+    transition: background-color .1s linear;
 }
 
 footer .maker{
@@ -351,12 +346,22 @@ footer .maker{
     flex-direction: column;
     gap: .5rem;
 
+    
+    -webkit-tap-highlight-color: transparent;
 }
 
 .github{
     font-size: 40px;
     cursor: pointer;
-    mix-blend-mode: multiply;
+    /* mix-blend-mode: multiply; */
+}
+
+.github:active{
+    transform: scale(.8);
+}
+
+.github:hover{
+    transform: scale(1.1);
 }
 
 .maker{
@@ -375,29 +380,29 @@ footer .maker{
 */
 .body-dark-mode{
     background-color: var(--d-body-clr);
-    transition: background-color .3s ease;
+    transition: background-color .1s linear;
 }
 
 .search-area .input-dark-mode{
     background-color: var(--d-light-body-clr) ; 
     color: var(--d-primary-txt-clr);
     border: 3px var(--d-light-body-clr) solid;
-    transition: background-color .3s ease ,border .3s ease;
+    transition: background-color .1s linear ,border .1s linear;
 }
 
 .dark-meaning-container {
     background-color: var(--d-light-body-clr);
-    transition: background-color .3s ease;
+    transition: background-color .1s linear;
 }
 
 .dark-footer{
     background-color: var(--d-light-body-clr);
-    transition: background-color .3s ease;
+    transition: background-color .1s linear;
 }
 
 .dark-toggle-cont{
     background-color: var(--d-light-body-clr);
-    transition: margin-left 1s,background-color .3s ease;
+    transition: margin-left .1s,background-color .1s linear;
 }
 
 .dark-circle {

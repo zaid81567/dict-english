@@ -306,7 +306,7 @@ toggle_container.addEventListener('click',()=>{
 
 
 document.body.addEventListener('keydown',(event)=>{
-    if (event.code == 'Enter'){
+    if (event.key == 'Enter' || event.key == 'Return'){
         get_meaning()
     }
 })
