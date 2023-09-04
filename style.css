@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Poppins&family=Proza+Libre&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code&display=swap');
 *{
     margin: 0;
     padding: 0;
@@ -6,23 +7,34 @@
 }
 
 :root{
-    /* --body-clr: #8880f6; */
-    --body-clr: #320061;
-    --phonetic-clr: #eb948a;
-    --part-of-speech-txt-clr: #56b0c2;
-    --part-of-speech-bk-clr: #cef3fb;
-    --li-clr : #c4c4c4;
+    --body-clr: #ffffff;
+    --light-gray-clr:#f4f4f4;
+    --dark-gray-clr:#757575;
+    --accent-clr: #a445ed;
+    --light-accent-clr:#e9d1fb;
 
-    --section-down-clr:#f2f2f1;
+    /* dark-mode */
+    --d-body-clr:#1d2026;
+    --d-light-body-clr:#242a31;
+    --d-primary-txt-clr:#cccccc;
+    --d-secondary-txt-clr:#a9b3b3;
+
+
 
     --span-h-w: 1.7rem;
 }
 
+
+
+/* ------------------------------ */
+
 body{
     background-color: var(--body-clr);
+    /* background-color: var(--d-body-clr); */
     height: 100vh;
-    font-family: 'Proza Libre', sans-serif;
+    font-family: 'Fira Code', monospace;
     position: relative;
+    transition: background-color .3s ease;
 }
 
 /* utilities */
@@ -43,7 +55,7 @@ hr {
     border: none;
     outline: none;
     padding: 1px;
-    background-color: rgba(130, 126, 126, 0.2);
+    background-color: var(--dark-gray-clr);
     margin: 1rem 0;
 }
 
@@ -55,87 +67,163 @@ nav {
     justify-content: center;
 }
 
-nav h1{
+/* nav h1{
     font-size: 32px;
     font-family: 'Proza Libre', sans-serif;
     color: white;
     margin-top: 1rem;
-}
+} */
 
 /* section-top */
 
 .section-top{
-    margin-top: 1.5rem;
+    margin-top: 3rem;
 }
+
+.top-icons{
+    font-size: 30px;
+    color: #9a9a9a;
+    
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10px;
+}
+
+.toggle-icon {
+    /* border: 2px black solid; */
+    display: flex;
+    align-items: center;
+    border-radius: 30% ;
+    background-color: var(--light-gray-clr);
+/* ill do it later using day and night two class to toggle with js */
+    padding: 5px 4px; 
+    height: 2rem;
+    width: 4rem;
+
+    cursor: pointer;
+    
+    transition: background-color .3s ease;
+}
+
+.toggle-icon .circle{
+    background-color: #757575;
+    margin-left: 3px;
+    height: 1.5rem;
+    width: 1.5rem;
+    border-radius: 12px;
+    transition: margin-left .1s;
+}
+
+
 
 .search-area {
     display: flex;
     justify-content: center;  
     flex-direction: column;
-    border-radius: 20px;
-    
-    position: relative;
 
-    overflow: hidden;
+    margin-top: 4rem;
 }
 
-.search-area input{
-    padding: 10px 55px;
-    font-size: 20px;
-    border-radius: 20px;
-    border: none;
+input{
+    padding: 25px 20px;
+    font-size: 16px;
+    font-family: 'Fira Code', monospace;
+    font-weight: bold;
+    text-transform: capitalize;
+    
+    
+    background-color: var(--light-gray-clr);
+    color: var(--dark-gray-clr);
+    border-radius: 15px;
+    border: 3px var(--light-gray-clr) solid;
     outline: none;
+
+    transition: background-color .3s ease;
+    transition: border .3s ease;
 }
 
-#search-btn,
-#clear-btn{
-    font-size: 1.5rem;
-    color: #929798;
-    cursor: pointer;
-
-    padding: 1rem 1rem;
+.search-area input:focus{
+    border: 3px #a445ed solid;
 }
-
-#search-btn {
-    position: absolute;
-    /* top: 10px;
-    left: 12px;*/
-    top: -6px;
-    left: -6px;
-} 
-
-#clear-btn{
-    position: absolute;
-    /* top: 7px;
-    right: 12px; */
-    top: -10px;
-    right: -6px;
-    font-size: 30px;
-}
-
-#search-btn:hover,#clear-btn:hover{
-    color: #333;
-    
-    background-color: #f2f2f2;
-
-}
-
-#search-btn:active,#clear-btn:active{
-    transform: scale(90%);
-}
-
 
 
 /* section-down */
 
 .section-down{
-    background-color: var(--section-down-clr);
+    background-color: var(--light-gray-clr);
     margin-top: 3rem;
-    min-height: 100vh;
+    min-height: 50vh;
     border-radius: 30px 30px 0 0;
     padding: .5rem;
     padding-bottom: 4rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    
+    transition: background-color .3s ease;
 }
+
+/* ERROR RESPONSE  */
+.unexpected-response-div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 1.2rem;
+    color: var(--dark-gray-clr);
+}
+
+.unexpected-response-div .emoji{
+    font-size: 50px;
+}
+
+.unexpected-response-div p{
+    text-align: center;
+}
+
+/* FIRST INTRO */
+.first-intro{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 1.2rem;
+    color: var(--dark-gray-clr);
+}
+
+.first-intro .dict-icon{
+    font-size: 50px;
+}
+
+.first-intro .app-name{
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.first-intro .qoute{
+    text-align: center;
+}
+
+
+/* endOfIntro */
+
+
+.searched-word-div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.phonetic {
+    margin: 1rem 0 0.5rem;
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--accent-clr);
+}
+
 
 .searched-word-div, .white-box {
     width: 97%;
@@ -143,67 +231,61 @@ nav h1{
     padding: .5rem 1rem;
     background-color: white;
     border-radius: 22px;
+
+    
+    transition: background-color .3s ease;
 }
 
 .searched-word {
     display: flex;
-    align-items: center;
-    gap: 1rem;
+    flex-direction: column;
 }
 
 .searched-word h2 {
-    font-size: 28px;
+    font-size: 50px;
 }
 
 .speaker{
-    font-size: 1.2rem;
+    font-size: 2rem;
+    height: 70px;
+    width: 70px;
+    background-color: var(--light-accent-clr);
+    color: var(--accent-clr);
     cursor: pointer;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 50%;
 }
 
 .speaker:active{
     transform: scale(90%);
 }
 
-.phonetic {
-    margin: 1rem 0 0.5rem;
-}
 
 /*meaning div*/
 .meaning-div {
     width: 98%;
+    transition: background-color .3s ease;
 }
 
 .part-of-speech {
     display: inline-block;
     padding: 3px 15px;
+    font-size: 24px;
+    font-style: italic;
     font-weight: bold;
     
     border-radius: 8px;
     margin-top: .5rem;
 }
 
-.part-of-speech-noun {
-    background-color: #b2ff98;
-    color: #144900;
-}
-
-.part-of-speech-verb {
-    background-color: #75ddf2;
-    color: #00596d;
-}
-
-.part-of-speech-adjective {
-    background-color:  #ffee7d;
-    color: rgb(99, 87, 0);
-}
-
-.part-of-speech-others {
-    background-color:  #ff86ae;
-    color: #970032;
-}
 
 .meanings{
     margin: 1rem 0 1.5rem;
+    
 }
 
 .meaning {
@@ -211,23 +293,22 @@ nav h1{
 }
 
 .span-div {
-    width: 8%;
+    margin-right: 1rem;
     text-align: center;
 }
 
 .meaning span{
-    background-color: transparent;
-    color: rgb(205, 200, 200);
+    font-size: 1rem;
+    font-style: italic;
+    font-weight: bold;
+    color: var(--dark-gray-clr);
     height: var(--span-h-w);
     width: var(--span-h-w);
-    /* margin-right: 2rem; */
     margin-top: 10px;
     
     display: flex;
     justify-content: center;
     align-items: center;
-
-    border: 3px rgb(206, 211, 212) solid;
     border-radius: 50%;
 }
 
@@ -254,21 +335,74 @@ nav h1{
     color: #1c7000;
 }
 
+/* FOOTER - github and name*/
 
-.copy-alert {
-    text-align: center;
-    transition: bottom .4sec ease-in;
+footer{
+    background-color: var(--light-gray-clr);
+    height: 20vh;
+    display: flex;
+    justify-content: center;
+    transition: background-color .3s ease;
 }
 
-.copy-alert p{
-    color: white;
-    background-color: rgb(0, 0, 0);
-    display: inline-block;
-    padding: 4px 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 15px 5px rgba(64, 64, 64, 0.4);
+footer .maker{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: .5rem;
+
 }
 
+.github{
+    font-size: 40px;
+    cursor: pointer;
+    mix-blend-mode: multiply;
+}
+
+.maker{
+    font-size: 20px;
+    letter-spacing: 1px;
+    color: var(--dark-gray-clr);
+}
+
+.maker .name {
+    font-weight: bold;
+}
+
+
+/* DARK MODE - for section down part, darkmode css is in js
+               since they were tough to maintain coz of their dynamic nature.
+*/
+.body-dark-mode{
+    background-color: var(--d-body-clr);
+    transition: background-color .3s ease;
+}
+
+.search-area .input-dark-mode{
+    background-color: var(--d-light-body-clr) ; 
+    color: var(--d-primary-txt-clr);
+    border: 3px var(--d-light-body-clr) solid;
+    transition: background-color .3s ease ,border .3s ease;
+}
+
+.dark-meaning-container {
+    background-color: var(--d-light-body-clr);
+    transition: background-color .3s ease;
+}
+
+.dark-footer{
+    background-color: var(--d-light-body-clr);
+    transition: background-color .3s ease;
+}
+
+.dark-toggle-cont{
+    background-color: var(--d-light-body-clr);
+    transition: margin-left 1s,background-color .3s ease;
+}
+
+.dark-circle {
+    background-color: var(--d-secondary-txt-clr);
+}
 
 
 

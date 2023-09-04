@@ -4,9 +4,12 @@
 
 
 let word = ''
+let is_dark_mode = false
+const toggle_container = document.getElementById('toggle-icon')
 const search_area = document.getElementById('search-area')
 const search_bar = document.getElementById('search-bar')
 const meaning_container = document.getElementById('meaning-container')
+const result_container = document.getElementById('result-container')
 const base_url = 'https://api.dictionaryapi.dev/api/v2/entries/en/'
 const options = {
     method:'GET'
@@ -29,6 +32,16 @@ function get_phonetic_box(data,word){
     // added searched word [h2]
     let h2 = document.createElement('h2')
     h2.textContent = word
+    searched_word.appendChild(h2)
+
+    // adding phonetic
+    let phonetic_el = document.createElement('p')
+    if(phonetic){
+        phonetic_el.textContent = phonetic
+        phonetic_el.classList.add('phonetic')
+        searched_word.appendChild(phonetic_el)
+    }
+    
     // added speaker_icon [icon]
     let speaker_icon = document.createElement('iconify-icon')
     const audio_url = data[0].phonetics[0].audio
@@ -43,17 +56,9 @@ function get_phonetic_box(data,word){
         audio.play()
     })
     speaker_icon.classList.add('speaker')
-
-    //appending h2 and speaker inside searched-word-div [h2 + speaker]
-    searched_word.appendChild(h2)
-    searched_word.appendChild(speaker_icon)
-    // adding phonetic
-    let phonetic_el = document.createElement('p')
-    phonetic_el.classList.add('phonetic')
-    phonetic_el.textContent = phonetic
     //appending searched-word to searched-word-div then to section
     searched_word_div.appendChild(searched_word)
-    searched_word_div.appendChild(phonetic_el)
+    searched_word_div.appendChild(speaker_icon)
     // searched_word_div.appendChild(document.createElement('hr'))
     meaning_container.appendChild(searched_word_div)
 
@@ -63,27 +68,18 @@ function create_white_box_with_meanings(element){
 
     let number_of_definitions = element.definitions.length
     let part_of_speech = element.partOfSpeech
-    let color_class = 'part-of-speech-others'
+    // let color_class = 'part-of-speech-others'
 
      //Creating [meaning-div]
     let meaning_div = document.createElement('div') //0
     meaning_div.classList.add('meaning-div','container','white-box')
     let part_of_speech_el = document.createElement('p')//1
-    if(part_of_speech == 'noun'){
-        color_class = 'part-of-speech-noun'
-    }
-    else if(part_of_speech == 'verb'){
-        color_class = 'part-of-speech-verb'
-    }
-    else if(part_of_speech == 'adjective'){
-        color_class = 'part-of-speech-adjective'
-    }
-
-    part_of_speech_el.classList.add('part-of-speech',color_class)
+    part_of_speech_el.classList.add('part-of-speech')
     part_of_speech_el.textContent = part_of_speech
     meaning_div.appendChild(part_of_speech_el)
     let meanings = document.createElement('div') //1
     meanings.classList.add('meanings')
+    
 
     for(let i = 0; i < number_of_definitions; i++){
         let definition = element.definitions[i].definition
@@ -93,7 +89,7 @@ function create_white_box_with_meanings(element){
         let span_div = document.createElement('div')//3
         span_div.classList.add('span-div')
         let span = document.createElement('span')
-        span.textContent = i+1
+        span.textContent = i+1 +'. '
         span_div.appendChild(span)
 
         //p
@@ -130,13 +126,13 @@ function create_white_box_with_meanings(element){
         meaning.appendChild(p)
         meaning.appendChild(copy_icon)
         meanings.appendChild(meaning)
-        
-        
-        if(i != number_of_definitions - 1)
-            meanings.appendChild(document.createElement('hr'))
     }
     meaning_div.appendChild(meanings)
     meaning_container.appendChild(meaning_div)
+
+    if(is_dark_mode){
+        darkMode_for_result(is_dark_mode)
+    }
 }
 
 
@@ -153,6 +149,9 @@ function render_data(data,word){
 
 
 function get_meaning(){
+    //first clear the meaning container
+    clear_section_first()
+
     if (navigator.onLine){
 
         word = get_word()
@@ -177,51 +176,99 @@ function get_meaning(){
     }
 }
 
+function create_respnse_box(response_title_val, response_val) {
+    let parent_div = document.createElement('div')
+    parent_div.classList.add('unexpected-response-div','container')
+
+    let p = document.createElement('p')
+    p.classList.add('emoji')
+    p.textContent = '😶'
+
+    let response_title = document.createElement('h3')
+    response_title.classList.add('response-title')
+    response_title.textContent = response_title_val
+
+    let response = document.createElement('p')
+    response.classList.add('response')
+    response.textContent = response_val
+
+    parent_div.appendChild(p)
+    parent_div.appendChild(response_title)
+    parent_div.appendChild(response)
+
+    return parent_div
+}
+
 
 function data_not_available_message(){
-    console.log('data_not_available_message in')
-    // FIRST PART
-    // CREATING SEARCHED WORD CONTAINER [searched-word-div]
-    let searched_word_div = document.createElement('div')
-    searched_word_div.classList.add('searched-word-div','container')
-    
-    let searched_word = document.createElement('div')
-    searched_word.classList.add('searched-word')
-    searched_word_div.appendChild(searched_word)
-    // console.log(searched_word_div)
-    // added searched word [h2]
-    let h3 = document.createElement('h3')
-    h3.textContent = 'Please check the spelling 🤓, \nData not availaible for this word !🥲'
-    h3.style.whiteSpace = 'pre-line'
-    searched_word.appendChild(h3)
-    searched_word.style.textAlign = 'center'
-    searched_word.classList.add('flex-center')
-    meaning_container.appendChild(searched_word_div)
+
+    let response_title_value = 'No Definition Found'
+    let response_value = 'Sorry Pal, definition for that word not available at this time. You can check this out later or head to the web instead.'
+
+    let parent_div = create_respnse_box(response_title_value,response_value)
+    console.log(parent_div)
+    meaning_container.appendChild(parent_div)
 }
 
 function offline_message(){
-    console.log('data_not_available_message in')
-    // FIRST PART
-    // CREATING SEARCHED WORD CONTAINER [searched-word-div]
-    let searched_word_div = document.createElement('div')
-    searched_word_div.classList.add('searched-word-div','container')
-    
-    let searched_word = document.createElement('div')
-    searched_word.classList.add('searched-word')
-    searched_word_div.appendChild(searched_word)
-    // console.log(searched_word_div)
-    // added searched word [h2]
-    let h3 = document.createElement('h3')
-    h3.textContent = 'Please check your internet connection !🔌'
-    searched_word.appendChild(h3)
-    searched_word.style.textAlign = 'center'
-    searched_word.classList.add('flex-center')
-    meaning_container.appendChild(searched_word_div)
+    let response_title_value = 'No Internet Connection'
+    let response_value = 'Please do check your network connection then try again.'
+
+    let parent_div = create_respnse_box(response_title_value,response_value)
+    meaning_container.appendChild(parent_div)
 }
 
 
 
-// small function
+
+function darkMode(){
+
+    is_dark_mode = !is_dark_mode
+    // console.log(is_dark_mode)
+
+    let body = document.body
+    let toggle_circle = toggle_container.children[0]
+    let footer = document.getElementsByTagName('footer')[0]
+
+    //BODY DARK
+    body.classList.toggle('body-dark-mode')
+    //TOGGLE DARK
+    toggle_container.classList.toggle('dark-toggle-cont')
+    toggle_circle.classList.toggle('dark-circle')
+    console.log(search_bar)
+    search_bar.classList.toggle('input-dark-mode')
+
+    darkMode_for_result(is_dark_mode)
+    
+
+
+    meaning_container.classList.toggle('dark-meaning-container')
+    footer.classList.toggle('dark-footer')
+}
+
+function darkMode_for_result (is_dark_mode){
+    let white_boxes = meaning_container.children
+    
+    if(white_boxes.length> 1){
+        if(is_dark_mode){
+            for(let i = 0; i<white_boxes.length; i++){
+                let white_box = white_boxes[i]
+                white_box.style.backgroundColor = '#1d2026'
+                white_box.style.color = '#cccccc'
+            }
+        }else{
+            for(let i = 0; i<white_boxes.length; i++){
+                let white_box = white_boxes[i]
+                white_box.style.backgroundColor = '#ffffff'
+                white_box.style.color = '#757575'
+            }
+        }
+        
+    }
+
+}
+
+// SMALL FUNCTIONS
 
 function get_word(){
     return search_bar.value
@@ -239,23 +286,27 @@ function clear_section_first(){
     }
 }
 
-//OTHERS
+//EVENT LISTENERS
 
-search_area.addEventListener('click',(e)=>{
-    if (e.target.id == 'search-btn'){
-        // console.log('search-btn')
-        // if()
-        clear_section_first()
-        get_meaning()
+toggle_container.addEventListener('click',()=>{
+    let toggle_btn = toggle_container.firstElementChild
+    
+    if(!toggle_btn.classList.contains('night')){
+        toggle_btn.style.marginLeft = '30px'
+        toggle_btn.classList.toggle('night')
+    }else{
+        toggle_btn.style.marginLeft = '3px'
+        toggle_btn.classList.toggle('night')
     }
-    else if (e.target.id == 'clear-btn'){
-        clear_search_bar()
-    }
+
+    darkMode()
+
+    
 })
+
 
 document.body.addEventListener('keydown',(event)=>{
     if (event.code == 'Enter'){
-        clear_section_first()
         get_meaning()
     }
 })
@@ -263,4 +314,4 @@ document.body.addEventListener('keydown',(event)=>{
 
 // test
 
-get_meaning()
+// get_meaning()

@@ -9,27 +9,38 @@
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
 </head>
 <body>
-
-    <header>
-        <nav class="container"><h1>Dictionary By Zaid</h1></nav>
-    </header>
     
     <section class="section-top">
+        <div class="top-icons container">
+            <iconify-icon icon="ps:book"></iconify-icon>
+            <div class="toggle-icon" id="toggle-icon">
+                <div class="circle"></div>
+            </div>
+        </div>
         <div class="search-area container" id="search-area">
-            <input type="text" id="search-bar" value="game">
-            <div class="search-bar-icons">
-                <iconify-icon icon="icon-park-outline:search" id="search-btn"></iconify-icon>
-                <iconify-icon icon="ic:round-clear" id="clear-btn"></iconify-icon> 
-            </div>       
+            <input class="search-bar" type="text" id="search-bar" placeholder="search for any word ...">
+        </div>
+    </section>
+    <section id="result-container">
+        <div class="meaning-container section-down" id="meaning-container">
+            <div class="first-intro">
+                <iconify-icon icon="noto:open-book" class="dict-icon"></iconify-icon>
+                <p class="app-name">Dictionary App</p>
+                <p class="qoute">In the middle of every difficulty lies opportunity.</p>
+                <p class="writer">- Albert Einstein</p>
+            </div>
         </div>
     </section>
 
-    <section class="section-down" id="meaning-container">
-            
-    </section>
-
-  
+    <footer>
+        <div class="maker">
+            <a href="https://github.com/zaid81567"><iconify-icon icon="devicon:github" class="github" id="github"></iconify-icon></a>
+            <p>Coded by <span class="name">Md Zaid</span></p>
+        </div>
+    </footer>
+    
     <!-- spacer -->
-    <div class="spacer"></div>
+    <!-- <div class="spacer"></div> -->
 </body>
 </html>
+
