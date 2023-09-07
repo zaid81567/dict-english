@@ -168,7 +168,7 @@ function get_meaning(){
             render_data(data, word) //render_data func call
         }).catch(error=>{
             console.error(error)
-            data_not_available_message()
+            data_not_available_message(word)
         })
     }else{
         console.log('offline - no connection !')
@@ -200,10 +200,10 @@ function create_respnse_box(response_title_val, response_val) {
 }
 
 
-function data_not_available_message(){
+function data_not_available_message(word){
 
     let response_title_value = 'No Definition Found'
-    let response_value = 'Sorry Pal, definition for that word not available at this time. You can check this out later or head to the web instead.'
+    let response_value = `Sorry Pal, definition for the word "${word}" not available at this time. You can check this out later or head to the web instead.`
 
     let parent_div = create_respnse_box(response_title_value,response_value)
     console.log(parent_div)
@@ -311,6 +311,15 @@ document.body.addEventListener('keydown',(event)=>{
     }
 })
 
+result_container.addEventListener('dblclick',(e)=>{
+    console.log('clicked')
+    console.log(document.getSelection().toString())
+    selected_text = document.getSelection().toString()
+    if(selected_text.split(' ').length == 1){
+        search_bar.value = selected_text
+        get_meaning()
+    }
+})
 
 // test
 
