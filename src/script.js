@@ -164,7 +164,7 @@ function get_meaning(){
             }
             return response.json()
         }).then(data=>{
-            console.log(data)
+            // console.log(data)
             render_data(data, word) //render_data func call
         }).catch(error=>{
             console.error(error)
@@ -224,7 +224,6 @@ function offline_message(){
 function darkMode(){
 
     is_dark_mode = !is_dark_mode
-    // console.log(is_dark_mode)
 
     let body = document.body
     let toggle_circle = toggle_container.children[0]
@@ -311,16 +310,21 @@ document.body.addEventListener('keydown',(event)=>{
     }
 })
 
+//Desktop touch to search
 result_container.addEventListener('dblclick',(e)=>{
-    console.log('clicked')
-    console.log(document.getSelection().toString())
-    selected_text = document.getSelection().toString()
+    let selected_text = document.getSelection().toString()
     if(selected_text.split(' ').length == 1){
         search_bar.value = selected_text
         get_meaning()
     }
 })
 
-// test
+//Phone touch to search 
+result_container.addEventListener('touchend',(e)=>{
+    let selected_text = window.getSelection.toString()
+    if(selected_text){
+        search_bar.value = selected_text
+        get_meaning()
+    }
+})
 
-// get_meaning()
