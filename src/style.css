@@ -227,6 +227,9 @@ input{
 
     
     transition: background-color .1s linear;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
 }
 
 .searched-word {

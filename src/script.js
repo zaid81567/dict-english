@@ -320,8 +320,8 @@ result_container.addEventListener('dblclick',(e)=>{
 })
 
 //Phone touch to search 
-result_container.addEventListener('touchend',(e)=>{
-    let selected_text = window.getSelection.toString()
+result_container.addEventListener('touchstart',(e)=>{
+    let selected_text = window.getSelection().toString()
     if(selected_text){
         search_bar.value = selected_text
         get_meaning()
